@@ -4,15 +4,21 @@
   <meta charset="utf-8">
   
   
-  <title>Hexo</title>
+  <title>SpringBoot + Jfinal Enjoy + JdbcTemplate 整合 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/index.html">
+  <meta name="description" content="最近发现了 Jfinal 的 ORM 非常好用，于是想着将其抽出来，因为公司目前基于 JdbcTemplate 简单做了封装，将 SQL 语句写在 SQL 文件中，然后读取出来用 JdbcTemplate 执行，跟 Jfinal 是类似的，所以想将其抽出来扩展公司当前的框架 下载链接：https:&#x2F;&#x2F;pan.quark.cn&#x2F;s&#x2F;bac2b41ffc60 核心代码讲解项目所用到的依赖 123456">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringBoot + Jfinal Enjoy + JdbcTemplate 整合">
+<meta property="og:url" content="http://example.com/2022/08/11/SpringBoot-Jfinal-Enjoy-JdbcTemplate-%E6%95%B4%E5%90%88/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="最近发现了 Jfinal 的 ORM 非常好用，于是想着将其抽出来，因为公司目前基于 JdbcTemplate 简单做了封装，将 SQL 语句写在 SQL 文件中，然后读取出来用 JdbcTemplate 执行，跟 Jfinal 是类似的，所以想将其抽出来扩展公司当前的框架 下载链接：https:&#x2F;&#x2F;pan.quark.cn&#x2F;s&#x2F;bac2b41ffc60 核心代码讲解项目所用到的依赖 123456">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://lush-harrier-e55.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fa2d1429b-74fd-4d91-af2e-563bfbe2dce3%2F%25E5%25BE%25AE%25E4%25BF%25A1%25E6%2588%25AA%25E5%259B%25BE_20220811175627.png?id=ea655dd7-229d-4551-9a2b-9d678494aa0c&table=block&spaceId=157cf5cc-652c-4b09-89ff-64fdf6678d1e&width=2000&userId=&cache=v2">
+<meta property="article:published_time" content="2022-08-11T10:36:33.000Z">
+<meta property="article:modified_time" content="2023-01-18T10:41:33.673Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lush-harrier-e55.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fa2d1429b-74fd-4d91-af2e-563bfbe2dce3%2F%25E5%25BE%25AE%25E4%25BF%25A1%25E6%2588%25AA%25E5%259B%25BE_20220811175627.png?id=ea655dd7-229d-4551-9a2b-9d678494aa0c&table=block&spaceId=157cf5cc-652c-4b09-89ff-64fdf6678d1e&width=2000&userId=&cache=v2">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -69,9 +75,7 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-SpringBoot-Jfinal-Enjoy-JdbcTemplate-整合" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-SpringBoot-Jfinal-Enjoy-JdbcTemplate-整合" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2022/08/11/SpringBoot-Jfinal-Enjoy-JdbcTemplate-%E6%95%B4%E5%90%88/" class="article-date">
   <time class="dt-published" datetime="2022-08-11T10:36:33.000Z" itemprop="datePublished">2022-08-11</time>
@@ -84,8 +88,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2022/08/11/SpringBoot-Jfinal-Enjoy-JdbcTemplate-%E6%95%B4%E5%90%88/">SpringBoot + Jfinal Enjoy + JdbcTemplate 整合</a>
+    <h1 class="p-name article-title" itemprop="headline name">
+      SpringBoot + Jfinal Enjoy + JdbcTemplate 整合
     </h1>
   
 
@@ -127,11 +131,9 @@
     </footer>
   </div>
   
-</article>
-
-
-
+    
   
+</article>
 
 
 </section>
