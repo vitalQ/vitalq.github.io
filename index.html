@@ -386,6 +386,177 @@ public @interface DbColumn &#123;
 
     
   
+    
+      <article
+id="post-手写HashMap"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/2018/09/09/%E6%89%8B%E5%86%99HashMap/">手写HashMap</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <p>首先定义接口：</p>
+<pre><code class="java">public interface VMap&lt;K, V&gt; &#123;
+
+    V put(K key, V value);
+
+    V get(K key);
+
+    Integer size();
+
+    interface Entry&lt;K, V&gt; &#123;
+
+        K getKey();
+
+        V getValue();
+    &#125;
+&#125;
+</code></pre>
+<p>实现接口：</p>
+<pre><code class="java">import java.util.Arrays;
+
+public class VHashMap&lt;K, V&gt; implements VMap&lt;K, V&gt; &#123;
+
+    //大小
+    private Integer size = 0;
+    //默认大小
+    private Integer defaultLength = 16;
+    //负载因子
+    private double loadFactor = 0.75D;
+    //存储数据的数组
+    private Entry&lt;K, V&gt;[] table;
+
+    VHashMap(Integer _defaultLength, double _loadFactor) &#123;
+        this.defaultLength = _defaultLength;
+        this.loadFactor = _loadFactor;
+        this.table = new Entry[defaultLength];
+    &#125;
+
+    VHashMap() &#123;
+        this.table = new Entry[defaultLength];
+    &#125;
+
+    Integer getIndex(K key) &#123;
+        return Math.abs((key.hashCode() % (defaultLength - 1)));
+    &#125;
+
+    @Override
+    public V put(K key, V value) &#123;
+        //获取下标
+        Integer index = getIndex(key);
+        //扩容
+        if (table.length &lt;= index + 1) &#123;
+            Integer len = table.length + (int) (table.length * loadFactor);
+            Entry&lt;K, V&gt;[] newTable = Arrays.copyOf(table, len);
+            this.table = newTable;
+        &#125;
+        //判断下标是否被占用
+        Entry&lt;K, V&gt; kvEntry = table[index];
+        //没有被占用
+        if (kvEntry == null) &#123;
+            table[index] = new Entry(key, value, null, index);
+            size++;
+        &#125; else &#123;
+            //判断是否相同的key
+            if (kvEntry.key.equals(key)) &#123;
+                //覆盖
+                table[index] = new Entry(key, value, kvEntry.next, index);
+            &#125; else &#123;
+                //把新的值放进去
+                table[index] = new Entry(key, value, kvEntry, index);
+                size++;
+            &#125;
+        &#125;
+
+        return table[index].getValue();
+    &#125;
+
+    @Override
+    public V get(K key) &#123;
+        Integer index = getIndex(key);
+        Entry&lt;K, V&gt; kvEntry = table[index];
+        do &#123;
+            if (kvEntry.key.equals(key)) &#123;
+                return table[index].getValue();
+            &#125;
+            Entry&lt;K, V&gt; next = kvEntry.next;
+            if (next == null) &#123;
+                return null;
+            &#125;
+            kvEntry = kvEntry.next;
+        &#125; while (!key.equals(kvEntry.key));
+
+        return kvEntry.getValue();
+    &#125;
+
+    @Override
+    public Integer size() &#123;
+        return size;
+    &#125;
+
+    class Entry&lt;K, V&gt; implements VMap.Entry&lt;K, V&gt; &#123;
+
+        private Entry&lt;K, V&gt; next;
+        private Integer index;
+        private K key;
+        private V value;
+
+        Entry(K _key, V _value, Entry&lt;K, V&gt; _next, Integer _index) &#123;
+            this.key = _key;
+            this.value = _value;
+            this.next = _next;
+            this.index = _index;
+        &#125;
+
+        Entry() &#123;
+        &#125;
+
+        @Override
+        public K getKey() &#123;
+            return this.key;
+        &#125;
+
+        @Override
+        public V getValue() &#123;
+            return this.value;
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2018-09-09T10:54:04.000Z" itemprop="datePublished">2018-09-09</time>
+</div>
+    
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
 
   
 </div>
@@ -418,6 +589,10 @@ public @interface DbColumn &#123;
             <a href="/2022/08/11/SpringBoot-Jfinal-Enjoy-JdbcTemplate-%E6%95%B4%E5%90%88/">SpringBoot + Jfinal Enjoy + JdbcTemplate 整合</a>
           </li>
         
+          <li>
+            <a href="/2018/09/09/%E6%89%8B%E5%86%99HashMap/">手写HashMap</a>
+          </li>
+        
       </ul>
     </div>
   </div>
@@ -427,7 +602,7 @@ public @interface DbColumn &#123;
   <div class="widget-wrap widget-archive">
     <div class="widget-title"><span>Archive</span></div>
     <div class="widget-inner">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a></li></ul>
     </div>
   </div>
 
