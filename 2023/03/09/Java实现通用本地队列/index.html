@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
     
-    <title>Mybatis XML转义字符 | Vital Blog</title>
+    <title>Vital Blog</title>
 
     <meta name="description" content="Vital Blog">
     <meta name="keywords" content="java">
@@ -15,21 +15,21 @@
 
     <meta property="og:locale" content="cn" />
     <meta property="og:type" content="article" />
-    <meta property="og:title" content= "Mybatis XML转义字符 | Vital Blog"  />
+    <meta property="og:title" content= "Vital Blog"  />
     <meta property="og:description" content= "Vital Blog" />
-    <meta property="og:url" content="https://vitalblog.net/2023/01/11/Mybatis%20XML%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6/index.html" />
+    <meta property="og:url" content="https://vitalblog.net/2023/03/09/Java%E5%AE%9E%E7%8E%B0%E9%80%9A%E7%94%A8%E6%9C%AC%E5%9C%B0%E9%98%9F%E5%88%97/index.html" />
     <meta property="og:site_name" content="" />
     <meta property="article:author" content="vital" />
     <meta property="article:publisher" content="" />
     <meta property="og:description" content="Vital Blog" />
-    <meta name="twitter:title" content="Mybatis XML转义字符 | Vital Blog"/>
+    <meta name="twitter:title" content="Vital Blog"/>
     <meta name="twitter:description" content="Vital Blog"/>
     <script type="application/ld+json">
         {
             "description": "Vital Blog",
             "author": { "@type": "Person", "name": "vital" },
             "@type": "BlogPosting",
-            "url": "https://vitalblog.net/2023/01/11/Mybatis%20XML%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6/index.html",
+            "url": "https://vitalblog.net/2023/03/09/Java%E5%AE%9E%E7%8E%B0%E9%80%9A%E7%94%A8%E6%9C%AC%E5%9C%B0%E9%98%9F%E5%88%97/index.html",
             "publisher": {
             "@type": "Organization",
             "logo": {
@@ -38,11 +38,11 @@
             },
             "name": "vital"
             },
-            "headline": "Mybatis XML转义字符 | Vital Blog",
-            "datePublished": "2023-01-11T10:36:33.000Z",
+            "headline": "Vital Blog",
+            "datePublished": "2023-03-08T17:35:40.099Z",
             "mainEntityOfPage": {
                 "@type": "WebPage",
-                "@id": "https://vitalblog.net/2023/01/11/Mybatis%20XML%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6/index.html"
+                "@id": "https://vitalblog.net/2023/03/09/Java%E5%AE%9E%E7%8E%B0%E9%80%9A%E7%94%A8%E6%9C%AC%E5%9C%B0%E9%98%9F%E5%88%97/index.html"
             },
             "@context": "http://schema.org"
         }
@@ -140,7 +140,7 @@
             <section class="inner">
                 <section class="inner-main">
                     <div class="post">
-    <article id="post-clezyoyap000480vn9kyqc3rl" class="article article-type-post" itemscope
+    <article id="post-clezyoyaj000180vn341s26hd" class="article article-type-post" itemscope
     itemprop="blogPost">
 
     <div class="article-inner">
@@ -152,33 +152,15 @@
         
 
         
-        <header class="article-header">
-            
-  
-    <h1 class="article-title" itemprop="name">
-      Mybatis XML转义字符
-    </h1>
-  
-
-        </header>
-        
 
         <div class="article-more-info article-more-info-post hairline">
 
             <div class="article-date">
-  <time datetime="2023-01-11T10:36:33.000Z" itemprop="datePublished">2023-01-11</time>
+  <time datetime="2023-03-08T17:35:40.099Z" itemprop="datePublished">2023-03-09</time>
 </div>
 
             
-            <div class="article-category">
-                <a class="article-category-link" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a>
-            </div>
-            
 
-            
-            <div class="article-tag">
-                <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/xml/" rel="tag">xml</a></li></ul>
-            </div>
             
 
             
@@ -190,52 +172,132 @@
         </div>
 
         <div class="article-entry post-inner-html hairline" itemprop="articleBody">
-            <pre><code class="xml">&lt;![CDATA[ &lt; ]]&gt;
+            <p>这里使用了delayed 来实现延迟队列。</p>
+<h1 id="1-定义函数接口"><a href="#1-定义函数接口" class="headerlink" title="1. 定义函数接口"></a>1. 定义函数接口</h1><pre><code class="java">@FunctionalInterface
+public interface EventFunction &#123;
+
+    void apply();
+&#125;
 </code></pre>
-<table>
-<thead>
-<tr>
-<th>转义字符</th>
-<th>符号</th>
-<th>名称</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>&amp;lt;</td>
-<td>&lt;</td>
-<td>小于</td>
-</tr>
-<tr>
-<td>&amp;gt;</td>
-<td>&gt;</td>
-<td>大于</td>
-</tr>
-<tr>
-<td>&amp;lt;&#x3D;</td>
-<td>&lt;&#x3D;</td>
-<td>小于等于</td>
-</tr>
-<tr>
-<td>&amp;gt;&#x3D;</td>
-<td>&gt;&#x3D;</td>
-<td>大于等于</td>
-</tr>
-<tr>
-<td>&amp;amp;</td>
-<td>&amp;</td>
-<td>和</td>
-</tr>
-<tr>
-<td>&amp;apos;</td>
-<td>‘</td>
-<td>单引号</td>
-</tr>
-<tr>
-<td>&amp;quot;</td>
-<td>“</td>
-<td>双引号</td>
-</tr>
-</tbody></table>
+<p>这个是用于执行函数，Java自带的有 Consumer 和 Function 等其他，因为我这边不需要入参和结果，所以我自己重新定义了一个。</p>
+<br/>
+
+<h1 id="2-定义实体类"><a href="#2-定义实体类" class="headerlink" title="2. 定义实体类"></a>2. 定义实体类</h1><pre><code class="java">public class DelayedEntity implements Delayed &#123;
+
+    private final String id;
+    private final long expireTime;
+    private final EventFunction function;
+
+    public DelayedEntity(long expireTime, EventFunction function) &#123;
+        super();
+        this.expireTime = expireTime;
+        this.function = function;
+        // HuTool工具自动生成id，用于排查问题
+        this.id = IdUtil.fastSimpleUUID();
+    &#125;
+
+    public void execute() &#123;
+        function.apply();
+    &#125;
+
+
+    @Override
+    public long getDelay(TimeUnit unit) &#123;
+        return expireTime - System.currentTimeMillis();
+    &#125;
+
+    @Override
+    public int compareTo(Delayed o) &#123;
+        return (int) (this.getDelay(TimeUnit.MILLISECONDS) - o.getDelay(TimeUnit.MILLISECONDS));
+    &#125;
+
+    public String getId() &#123;
+        return id;
+    &#125;
+&#125;
+</code></pre>
+<br/>
+
+<h1 id="3-定义消费者"><a href="#3-定义消费者" class="headerlink" title="3. 定义消费者"></a>3. 定义消费者</h1><pre><code class="java">@Slf4j
+@Component
+public class DelayEventConsumer implements Runnable &#123;
+
+    private final DelayQueue&lt;DelayedEntity&gt; queue = new DelayQueue&lt;&gt;();
+
+    public DelayEventConsumer() &#123;
+    &#125;
+
+    public void submit(long expireTime, EventFunction function) &#123;
+        queue.put(new DelayedEntity(expireTime, function));
+    &#125;
+
+
+    @Override
+    public void run() &#123;
+        DelayedEntity entity = null;
+        while (true) &#123;
+            try &#123;
+                entity = queue.poll();
+                if (entity == null) &#123;
+                    continue;
+                &#125;
+                log.info(&quot;延迟队列 [&#123;&#125;] 执行消息&quot;, entity.getId());
+                entity.execute();
+                log.info(&quot;延迟队列 [&#123;&#125;] 执行完毕&quot;, entity.getId());
+            &#125; catch (Exception e) &#123;
+                log.error(String.format(&quot;延迟队列 [%s] 执行报错&quot;, entity != null ? entity.getId() : &quot;null&quot;), e);
+            &#125;
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<br/>
+
+<h1 id="4-定义线程池"><a href="#4-定义线程池" class="headerlink" title="4. 定义线程池"></a>4. 定义线程池</h1><p>定义一个只有一个线程的线程池，在程序启动的时候执行。</p>
+<pre><code class="java">@Component
+public class ApplicationStartListener implements ApplicationListener&lt;ApplicationStartedEvent&gt; &#123;
+
+    @Autowired
+    private DelayEventConsumer delayEventConsumer;
+
+    @Override
+    public void onApplicationEvent(@NotNull ApplicationStartedEvent event) &#123;
+        // HuTool工具生成只有一个线程的线程池，将消费者放进去执行
+        ThreadUtil.newSingleExecutor().submit(delayEventConsumer);
+    &#125;
+
+&#125;
+</code></pre>
+<br/>
+
+<h1 id="5-测试"><a href="#5-测试" class="headerlink" title="5. 测试"></a>5. 测试</h1><p>写了个接口用来测试</p>
+<pre><code class="java">@Slf4j
+@RestController
+@RequestMapping(&quot;/test&quot;)
+@RequiredArgsConstructor
+public class TestController &#123;
+  private final DelayEventConsumer delayEventConsumer;
+  private final UserTagService userTagService;
+  
+  @GetMapping(&quot;/testDelayQueue&quot;)
+    public void testDelayQueue() &#123;
+        log.info(&quot;提交事件&quot;);
+        // 延迟2秒执行
+        delayEventConsumer.submit(System.currentTimeMillis() + 2000, () -&gt; &#123;
+            List&lt;UserTags&gt; userTags = userTagService.randomRobot();
+            log.info(JsonUtil.toJsonStr(userTags));
+        &#125;);
+    &#125;
+&#125;
+</code></pre>
+<br/>
+
+<p>结果</p>
+<pre><code class="text">2023-03-08 17:27:49.631  INFO 16792 --- [ool-13-thread-1] net.vitalblog.Logger   : 提交事件
+2023-03-08 17:27:51.755  INFO 16792 --- [ool-13-thread-1] net.vitalblog.Logger   : 延迟队列 [c195406b95a048f7b27825f6839dbe98] 执行消息
+2023-03-08 17:27:52.475  INFO 16792 --- [ool-13-thread-1] net.vitalblog.Logger   : [&#123;&quot;country&quot;:&quot;IN&quot;,&quot;createTime&quot;:1677764575237,&quot;id&quot;:4976,&quot;level&quot;:20,&quot;nickname&quot;:&quot;👑 ptB_Colin&quot;,&quot;sid&quot;:104485,&quot;type&quot;:&quot;robot&quot;,&quot;userId&quot;:1368812591190769664&#125;]
+2023-03-08 17:27:52.476  INFO 16792 --- [ool-13-thread-1] net.vitalblog.Logger   : 延迟队列 [c195406b95a048f7b27825f6839dbe98] 执行完毕
+</code></pre>
 
         </div>
 
@@ -254,19 +316,10 @@
     
 <nav class="article-nav">
   
-    <a href="/2023/03/09/Java%E5%AE%9E%E7%8E%B0%E9%80%9A%E7%94%A8%E6%9C%AC%E5%9C%B0%E9%98%9F%E5%88%97/" id="article-nav-newer" class="article-nav-link-wrap">
-      <div class="article-nav-caption">下一篇</div>
-      <div class="article-nav-title">
-        
-          (no title)
-        
-      </div>
-    </a>
   
-  
-    <a href="/2022/08/11/SpringBoot-Jfinal-Enjoy-JdbcTemplate-%E6%95%B4%E5%90%88/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2023/01/11/Mybatis%20XML%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-caption">上一篇</div>
-      <div class="article-nav-title">SpringBoot + Jfinal Enjoy + JdbcTemplate 整合</div>
+      <div class="article-nav-title">Mybatis XML转义字符</div>
     </a>
   
 </nav>
@@ -275,15 +328,15 @@
     <section class="share">
         <div class="share-title">分享</div>
         <a class="share-item" target="_blank"
-            href="https://twitter.com/share?text=Mybatis XML转义字符 - Vital Blog&url=https%3A%2F%2Fvitalblog.net%2F2023%2F01%2F11%2FMybatis%2520XML%25E8%25BD%25AC%25E4%25B9%2589%25E5%25AD%2597%25E7%25AC%25A6%2F">
+            href="https://twitter.com/share?text= - Vital Blog&url=https%3A%2F%2Fvitalblog.net%2F2023%2F03%2F09%2FJava%25E5%25AE%259E%25E7%258E%25B0%25E9%2580%259A%25E7%2594%25A8%25E6%259C%25AC%25E5%259C%25B0%25E9%2598%259F%25E5%2588%2597%2F">
             <ion-icon name="logo-twitter"></ion-icon>
         </a>
         <a class="share-item" target="_blank"
-            href="https://www.facebook.com/sharer.php?title=Mybatis XML转义字符 - Vital Blog&u=https%3A%2F%2Fvitalblog.net%2F2023%2F01%2F11%2FMybatis%2520XML%25E8%25BD%25AC%25E4%25B9%2589%25E5%25AD%2597%25E7%25AC%25A6%2F">
+            href="https://www.facebook.com/sharer.php?title= - Vital Blog&u=https%3A%2F%2Fvitalblog.net%2F2023%2F03%2F09%2FJava%25E5%25AE%259E%25E7%258E%25B0%25E9%2580%259A%25E7%2594%25A8%25E6%259C%25AC%25E5%259C%25B0%25E9%2598%259F%25E5%2588%2597%2F">
             <ion-icon name="logo-facebook"></ion-icon>
         </a>
         <!-- <a class="share-item" target="_blank"
-            href="https://service.weibo.com/share/share.php?title=Mybatis XML转义字符 - Vital Blog&url=https://vitalblog.net/2023/01/11/Mybatis%20XML%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6/&pic=">
+            href="https://service.weibo.com/share/share.php?title= - Vital Blog&url=https://vitalblog.net/2023/03/09/Java%E5%AE%9E%E7%8E%B0%E9%80%9A%E7%94%A8%E6%9C%AC%E5%9C%B0%E9%98%9F%E5%88%97/&pic=">
             <div class="n-icon n-icon-weibo"></div>
         </a> -->
     </section>
