@@ -140,7 +140,7 @@
             <section class="inner">
                 <section class="inner-main">
                     <div class="post">
-    <article id="post-clfz5s4mu0007vkvn1zbd2lb0" class="article article-type-post" itemscope
+    <article id="post-clfz5vgue000888vn9bjre8e6" class="article article-type-post" itemscope
     itemprop="blogPost">
 
     <div class="article-inner">
@@ -219,7 +219,7 @@ public class RedisMessageConfig &#123;
      * @return org.springframework.data.redis.listener.adapter.MessageListenerAdapter
      */
     @Bean
-    public MessageListenerAdapter listenerAdapter(RedisMessageListenerreceiver) &#123;
+    public MessageListenerAdapter listenerAdapter(RedisMessageListener receiver) &#123;
         //这个地方是给 messageListenerAdapter 传入一个消息接受的处理器，利用反射的方法调用“onMessage”
         return new MessageListenerAdapter(receiver, &quot;onMessage&quot;);
     &#125;
