@@ -129,6 +129,113 @@
   
     
       <article
+id="post-Redis 发布订阅模式介绍，Java 使用 Redis 实现广播"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/2023/04/02/Redis%20%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F%E4%BB%8B%E7%BB%8D%EF%BC%8CJava%20%E4%BD%BF%E7%94%A8%20Redis%20%E5%AE%9E%E7%8E%B0%E5%B9%BF%E6%92%AD/">Redis 发布订阅模式介绍，Java 使用 Redis 实现广播</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h1 id="介绍："><a href="#介绍：" class="headerlink" title="介绍："></a>介绍：</h1><p>Redis发布订阅（Publish &#x2F; Subscribe）模式是Redis提供的一种消息通信方式，它基于消息中间件的设计思想，实现了消息的生产者和消费者的解耦。Redis 发布订阅模式的工作原理类似于消息队列，不同之处在于 Redis 发布订阅模式是一种多对多的消息通信方式，一个消息可以被多个消费者接收。</p>
+<p>在Redis发布订阅模式中，消息的生产者将消息发布到指定的频道，而消费者则通过订阅对应的频道来接收消息。当消息生产者发布了一条消息到某个频道时，所有订阅了该频道的消费者都可以接收到这条消息。</p>
+<p>Redis发布订阅模式包括两个核心的命令：PUBLISH 和 SUBSCRIBE。PUBLISH 命令用于向指定的频道发布一条消息，而 SUBSCRIBE 命令则用于订阅指定的频道。</p>
+<h1 id="原理："><a href="#原理：" class="headerlink" title="原理："></a>原理：</h1><ol>
+<li>Redis 服务器维护了一个”订阅者列表”，该列表记录了所有订阅了至少一个频道的客户端。</li>
+<li>当一个客户端订阅一个或多个频道时，Redis服务器会将该客户端添加到对应频道的”订阅者列表”中。</li>
+<li>当一个客户端发布消息到某个频道时，Redis服务器会将该消息发送给该频道的所有订阅者。</li>
+<li>当一个客户端取消订阅一个频道时，Redis服务器会将该客户端从该频道的”订阅者列表”中移除。</li>
+</ol>
+<p>在 Redis 发布订阅模式中，Redis 服务器起到了一个消息中心的作用，它负责维护订阅者列表和消息发布、转发的机制。同时，Redis提供了一系列API，使得客户端可以方便地进行订阅和发布操作。</p>
+<h1 id="在-SpringBoot-中使用"><a href="#在-SpringBoot-中使用" class="headerlink" title="在 SpringBoot 中使用"></a>在 SpringBoot 中使用</h1><h3 id="创建监听器"><a href="#创建监听器" class="headerlink" title="创建监听器"></a>创建监听器</h3><pre><code class="java">@Component
+public class RedisMessageListener implements MessageListener &#123;
+
+    @Override
+    public void onMessage(Message message, byte[] pattern) &#123;
+        String s = new String(message.getBody());
+        System.out.println(&quot;收到消息：&quot; + s);
+    &#125;
+
+&#125;
+</code></pre>
+<h3 id="配置监听器"><a href="#配置监听器" class="headerlink" title="配置监听器"></a>配置监听器</h3><pre><code class="java">@Configuration
+public class RedisMessageConfig &#123;
+
+    /**
+     * 消息监听器适配器
+     * @return org.springframework.data.redis.listener.adapter.MessageListenerAdapter
+     */
+    @Bean
+    public MessageListenerAdapter listenerAdapter(RedisMessageListenerreceiver) &#123;
+        //这个地方是给 messageListenerAdapter 传入一个消息接受的处理器，利用反射的方法调用“onMessage”
+        return new MessageListenerAdapter(receiver, &quot;onMessage&quot;);
+    &#125;
+    
+    /**
+     * redis消息监听器容器
+     * @return org.springframework.data.redis.listener.RedisMessageListenerContainer
+     */
+    @Bean
+    public RedisMessageListenerContainer redisMessageListenerContainer(RedisConnectionFactory connectionFactory, MessageListenerAdapter listenerAdapter) &#123;
+        RedisMessageListenerContainer container = new RedisMessageListenerContainer();
+        container.setConnectionFactory(connectionFactory);
+        // 订阅了一个叫 my-channel 的频道
+        container.addMessageListener(listenerAdapter, new PatternTopic(&quot;my-channel&quot;));
+        // 这个container 可以添加多个 messageListener
+        return container;
+    &#125;
+  
+&#125;
+</code></pre>
+<h3 id="测试方法"><a href="#测试方法" class="headerlink" title="测试方法"></a>测试方法</h3><pre><code class="java">    @GetMapping(value = &quot;/testRedis&quot;)
+    public void testRedis() &#123;
+        redisTemplate.convertAndSend(&quot;my-channel&quot;, JsonUtil.toJsonStr(new Student(1L, &quot;张三&quot;)));
+    &#125;
+</code></pre>
+<h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><p><img src="https://img-blog.csdnimg.cn/ab5972c0f3544ed5a95484aa63218c80.png" alt="在这里插入图片描述"></p>
+
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2023-04-02T08:40:00.000Z" itemprop="datePublished">2023-04-02</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a>
+        </div>
+    
+    
+        <div class="article-tag">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/" rel="tag">redis</a></li></ul>
+        </div>
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
 id="post-Java 如何获取请求原始JSON字符串"
 class="article article-type-post"
 >
@@ -962,7 +1069,7 @@ public class VHashMap&lt;K, V&gt; implements VMap&lt;K, V&gt; &#123;
   <div class="widget-wrap widget-tags">
     <div class="widget-title"><span>Tags</span></div>
     <div class="widget-inner">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/delayed/" rel="tag">delayed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/json/" rel="tag">json</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xml/" rel="tag">xml</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/delayed/" rel="tag">delayed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/json/" rel="tag">json</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/" rel="tag">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xml/" rel="tag">xml</a></li></ul>
     </div>
   </div>
 
@@ -973,6 +1080,10 @@ public class VHashMap&lt;K, V&gt; implements VMap&lt;K, V&gt; &#123;
     <div class="widget-title"><span>Recent Posts</span></div>
     <div class="widget-inner">
       <ul>
+        
+          <li>
+            <a href="/2023/04/02/Redis%20%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F%E4%BB%8B%E7%BB%8D%EF%BC%8CJava%20%E4%BD%BF%E7%94%A8%20Redis%20%E5%AE%9E%E7%8E%B0%E5%B9%BF%E6%92%AD/">Redis 发布订阅模式介绍，Java 使用 Redis 实现广播</a>
+          </li>
         
           <li>
             <a href="/2023/04/01/Java%20%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E8%AF%B7%E6%B1%82%E5%8E%9F%E5%A7%8BJSON%E5%AD%97%E7%AC%A6%E4%B8%B2/">Java 如何获取请求原始JSON字符串</a>
@@ -988,10 +1099,6 @@ public class VHashMap&lt;K, V&gt; implements VMap&lt;K, V&gt; &#123;
         
           <li>
             <a href="/2022/08/11/SpringBoot-Jfinal-Enjoy-JdbcTemplate-%E6%95%B4%E5%90%88/">SpringBoot + Jfinal Enjoy + JdbcTemplate 整合</a>
-          </li>
-        
-          <li>
-            <a href="/2018/09/09/%E6%89%8B%E5%86%99HashMap/">手写HashMap</a>
           </li>
         
       </ul>
